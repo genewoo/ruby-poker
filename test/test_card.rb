@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
-class TestCard < Test::Unit::TestCase
+class TestCard < Minitest::Test
   def setup
     # testing various input formats for cards
     @c1 = Card.new("9c")
@@ -96,7 +96,7 @@ class TestCard < Test::Unit::TestCase
 
   def test_equals
     c = Card.new("9h")
-    assert_not_equal(@c1, c)
+    assert(@c1 != c)
     assert_equal(@c1, @c1)
   end
 end

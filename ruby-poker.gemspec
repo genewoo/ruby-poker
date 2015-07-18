@@ -25,6 +25,6 @@ Gem::Specification.new do |s|
   s.rdoc_options << '--title' << 'Ruby Poker Documentation' <<
                     '--main'  << 'README.rdoc' <<
                     '--inline-source' << '-q'
-
+  s.add_development_dependency('minitest', '~>5.7')
   s.add_development_dependency('shoulda-context', '~> 1.1')
 end

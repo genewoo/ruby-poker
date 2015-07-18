@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
-class TestPokerHand < Test::Unit::TestCase
+class TestPokerHand < Minitest::Test
   context "A PokerHand instance" do
 
     setup do
@@ -151,7 +151,7 @@ class TestPokerHand < Test::Unit::TestCase
 
     should "be able to match regular expressions" do
       assert_match(/9c/, @trips.to_s)
-      assert_no_match(/AD/, @trips.to_s)
+      assert(!(/AD/ =~ @trips.to_s))
     end
 
     should "return the correct number of cards in the hand" do
@@ -219,8 +219,10 @@ class TestPokerHand < Test::Unit::TestCase
       end
 
       should "allow duplicates on initialize" do
-        assert_nothing_raised RuntimeError do
+        begin
           PokerHand.new("3s 3s")
+        rescue RuntimeError
+          assert(false)  
         end
       end
 
@@ -239,7 +241,7 @@ class TestPokerHand < Test::Unit::TestCase
       should "not allow duplicates on initialize" do
         PokerHand.allow_duplicates = false
 
-        assert_raise RuntimeError do
+        assert_raises RuntimeError do
           PokerHand.new("3s 3s")
         end
 
@@ -250,7 +252,7 @@ class TestPokerHand < Test::Unit::TestCase
         PokerHand.allow_duplicates = false
 
         ph = PokerHand.new("2d")
-        assert_raise RuntimeError do
+        assert_raises RuntimeError do
           ph << "2d"
         end
 
@@ -290,7 +292,7 @@ class TestPokerHand < Test::Unit::TestCase
 
     should "not modify the receiver hand" do
       result = @base + 'Qc'
-      assert_not_equal result, @base
+      assert result != @base
     end
 
     should "not affect receiver cards" do

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/test_helper')
 
-class TestFullHouse < Test::Unit::TestCase
+class TestFullHouse < Minitest::Test
 
   context "A Full House should return the correct cards from sort_using_rank" do
 
